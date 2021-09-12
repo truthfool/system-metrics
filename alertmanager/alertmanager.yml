@@ -1,0 +1,11 @@
+global:
+ resolve_timeout: 1m
+
+route:
+ receiver: 'email-notifications'
+
+receivers:
+- name: 'email-notifications'
+  email_configs:
+  - to: ishanranasingh@gmail.com
+    # To be added

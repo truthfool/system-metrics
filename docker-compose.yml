@@ -1,4 +1,9 @@
 version: '3'
+
+networks:
+  monitor-net:
+    driver: bridge
+
 services:
   prometheus:
     image: prom/prometheus
@@ -10,11 +15,15 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - '9090:9090'
+    networks:
+      - monitor-net
   
   node-exporter:
     image: prom/node-exporter
     ports:
       - '9100:9100'
+    networks:
+      - monitor-net
 
   alertmanager:
     image: prom/alertmanager
@@ -34,3 +43,5 @@ services:
       - ./data/grafana:/data/grafana
     ports: 
       - '3000:3000'
+    networks:
+      - monitor-net
