@@ -1,28 +1,12 @@
-global:
-  resolve_timeout: 1m
-  smtp_smarthost: smtp.gmail.com:587
-  smtp_from: rrka79wal@gmail.com
-  smtp_auth_username: rrka79wal@gmail.com
-  smtp_auth_password: <pwd>
-
-
 route:
-  receiver: 'email-notifications'
+  group_by: ['alertname']
+  receiver: email-notifications
 
 receivers:
 - name: 'email-notifications'
   email_configs:
   - to: rrka79wal@gmail.com
     from: rrka79wal@gmail.com
-    smarthost: smtp.gmail.com:587
-    auth_username: rrka79wal@gmail.com
-    auth_identity: rrka79wal@gmail.com
-    auth_password: <pwd>
+    smarthost: localhost:25
+    require_tls: false
     send_resolved: true
-
-inhibit_rules:
-  - source_match:
-      severity: 'critical'
-    target_match:
-      severity: 'warning'
-    equal: ['alertname', 'dev', 'instance']
