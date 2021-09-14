@@ -2,10 +2,14 @@ global:
  resolve_timeout: 1m
 
 route:
- receiver: 'email-notifications'
+  receiver: email-notification
 
 receivers:
-- name: 'email-notifications'
+- name: email-notification
   email_configs:
-  - to: ishanranasingh@gmail.com
-    # To be added
+  - to: EMAIL_ID
+    from: EMAIL_ID
+    smarthost: smtp.gmail.com:587
+    auth_username: EMAIL_ID
+    auth_identity: EMAIL_ID
+    auth_password: APP_PASSWORD
