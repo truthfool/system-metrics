@@ -1,8 +1,13 @@
 global:
- resolve_timeout: 1m
+  resolve_timeout: 1m
+  smtp_smarthost: smtp.gmail.com:587
+  smtp_from: EMAIL_ID
+  smtp_auth_username: EMAIL_ID
+  smtp_auth_password: <pwd>
+
 
 route:
-  receiver: email-notification
+  receiver: 'email-notifications'
 
 receivers:
 - name: email-notification
@@ -12,4 +17,12 @@ receivers:
     smarthost: smtp.gmail.com:587
     auth_username: EMAIL_ID
     auth_identity: EMAIL_ID
-    auth_password: APP_PASSWORD
+    auth_password: <pwd>
+    send_resolved: true
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'dev', 'instance']
