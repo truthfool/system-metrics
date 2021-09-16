@@ -5,3 +5,5 @@ A system metrics visualizer using prometheus and grafana
 
 To build the image : 
 `docker-compose -f docker-compose.yml up`
+
+Add your alerts in alert.rules.
